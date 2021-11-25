@@ -70,8 +70,8 @@ const mailsev = (participant) => {
 		port: 465,
 		secure: true, // true for 465, false for other ports
 		auth: {
-			user: "testjain786@gmail.com", // generated ethereal user
-			pass: "@saranshJ44", // generated ethereal password
+			user: "hungrykiller821@gmail.com", // generated ethereal user
+			pass: "Devopod@o2may2ooo", // generated ethereal password
 		},
 	});
 
