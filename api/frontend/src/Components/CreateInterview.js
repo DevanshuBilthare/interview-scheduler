@@ -14,7 +14,9 @@ const CreateInterview = () => {
 
     useEffect( () => {
          axios.get('/participant')
-        .then(data => setparticipants(data.data))
+        .then(data => {
+          setparticipants(data.data)
+        })
         .catch(err => console.log(err))
     }, [])
 
@@ -30,8 +32,14 @@ const CreateInterview = () => {
             alert("Interviewer and Participant can not be same")
          }
           await axios.post("/create", interview)
-            .then(data => console.log(data))
-            .catch(err => console.log(err.response));
+            .then(data => {
+              console.log(data)
+              alert("Interview Created Succesfully")
+            })
+            .catch(err => {
+              console.log(err.response);
+              alert(err.response)
+            })
           
      }
 
