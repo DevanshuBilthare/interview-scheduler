@@ -10,8 +10,8 @@ function App() {
     <div className="app_container">
     <Navbar />
     <Routes>
-    <Route path="/add" element={<CreateInterview/>}  />
-    <Route path="/create" element={<Addparticipants/>}  />
+    <Route path="/createInterview" element={<CreateInterview/>}  />
+    <Route path="/addParticipant" element={<Addparticipants/>}  />
     <Route path="/" element={<ShowInterview/>}  />
     </Routes>
     </div>

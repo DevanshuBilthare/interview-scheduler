@@ -19,7 +19,7 @@ const Addparticipants = () => {
      const SubmitHandler = async (e) => {
          e.preventDefault();
          await axios.post("/addparticipant", participant )
-         .then(data => console.log(data))
+         .then(data => alert("Participant Created"))
          .catch(err => console.log(err.response));
      }
 

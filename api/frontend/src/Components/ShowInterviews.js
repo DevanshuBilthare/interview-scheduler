@@ -7,7 +7,10 @@ const ShowInterviews = () => {
 
     useEffect(() => {
         axios.get('/')
-            .then(data => setinterview(data.data))
+            .then(data => {
+                setinterview(data.data)
+                console.log(data.data)
+            })
             .catch(err => console.log(err))
     }, [])
 

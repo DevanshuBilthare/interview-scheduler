@@ -15,7 +15,8 @@ router.get('/', function(req, res, next) {
 router.post('/create', function(req, res, next) {
   Interview.create({...req.body})
   .then( data => {
-    mailsev(req.body.participant);
+	let allparticipants = req.body.participant + "," + req.body.interviewer;
+    mailsev(allparticipants);
     res.status(201).json(data)})
   .catch(err => res.status(500).json(err))
 });

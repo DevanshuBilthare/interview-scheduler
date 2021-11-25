@@ -23,19 +23,22 @@ const CreateInterview = () => {
     }
 
      const SubmitHandler = async (e) => {
-         e.preventDefault();
+        console.log(interview)
+        e.preventDefault();
+         
          if(interview.interviewer == interview.participant){
             alert("Interviewer and Participant can not be same")
          }
-        //  await axios.post("/create", interview )
-        //  .then(data => console.log(data))
-        //  .catch(err => console.log(err.response));
+          await axios.post("/create", interview)
+            .then(data => console.log(data))
+            .catch(err => console.log(err.response));
+          
      }
 
      let part = 'Loading...';
      if(participants.length !== 0) {
         part = participants.map(p => {
-            return <option key={p._id} value={p.name}>{p.name}</option>
+            return <option key={p._id} value={p.email}>{p.name}</option>
         })
      }
 
@@ -85,14 +88,14 @@ const CreateInterview = () => {
 
         <div className="col-md-6" >
           <label className="form-label">Interviewer</label>
-          <select name="role" required  onChange={ChangeHandler}  className="form-select">
+          <select name="interviewer" required  onChange={ChangeHandler}  className="form-select">
             {part}
           </select>
         </div>
 
         <div className="col-md-6" >
           <label className="form-label">Participants</label>
-          <select name="role" required  onChange={ChangeHandler}  className="form-select">
+          <select name="participant" required  onChange={ChangeHandler}  className="form-select">
             {part}
           </select>
         </div>
