@@ -6,12 +6,14 @@ const nodemailer = require("nodemailer");
 const Interview = require('../models/interviewModel');
 const User = require('../models/userModel');
 
+//show all interviews
 router.get('/', function(req, res, next) {
   Interview.find()
   .then( data => res.status(200).json(data))
   .catch(err => res.status(500).json(err))
 });
 
+//create the interview
 router.post('/create', function(req, res, next) {
   Interview.create({...req.body})
   .then( data => {
@@ -21,48 +23,50 @@ router.post('/create', function(req, res, next) {
   .catch(err => res.status(500).json(err))
 });
 
+//update the interview
 router.post('/update/:id', function(req, res, next) {
-  Interview.findOneAndUpdate({_id: id}, {$set: {...req.body}},{new: true})
+  Interview.findOneAndUpdate({_id: req.params.id}, {$set: {...req.body}},{new: true})
   .then( data => res.status(200).json(data))
   .catch(err => res.status(500).json(err))
 });
 
+//delete interview
+router.post('.delete/:id', function(req, res, next){
+	Interview.findOneAndDelete({_id: rea.parama.id})
+	.then(data => res.status(200).json(data))
+  	.catch(err => res.status(500).json(err))
+})
 
+// -----------------------PARTICIPANT ROUTES-----------------------------------------
 
-
-// ----------------------------------------------------------------
-
+//add the participant
 router.post('/addparticipant', function(req, res, next) {
   User.create({...req.body})
   .then( data => res.status(201).json(data))
   .catch(err => res.status(500).json(err))
 });
 
+//get all participant
 router.get('/participant', function(req, res, next) {
 	User.find()
 	.then( data => res.status(200).json(data))
 	.catch(err => res.status(500).json(err))
-  });
+});
 
-
-
-
-
-
-// ----------------------------------------------------------------
-
+// --------------------	NODEMAILER--------------------------------------------
 
 const mailsev = (participant) => {
-	const output = `<p> You have a new message </p>
-  <h3>Contact Details</h3>
-  <ul>
-  <li> Name:</li>
-  <li> Company:</li>
-  <li> Email:</li>
-  <li> Phone:</li>
-  </ul>
-  <h3>Message</h3>
-  <p></p>
+
+	const output = `<p> Your interview has been scheduled </p>
+		<h3>Contact Details</h3>
+		<ul>
+		<li> Name:</li>
+		<li> Company:</li>
+		<li> Email:</li>
+		<li> Phone:</li>
+		</ul>
+		<h3>Please join the interview</h3>
+		<p></p>
   `;
 
 	let transporter = nodemailer.createTransport({
@@ -94,3 +98,29 @@ const mailsev = (participant) => {
 	});
 };
 module.exports = router;
+
+// const myArr = participant.split(",");
+// 	console.log(myArr);
+// 	let interviewDetails;
+// 	Interview.findOne({participant: myArr[0]})
+// 	.then(data => {
+// 		console.log(data)
+// 		interviewDetails = data.title;
+// 	})
+
+// 	console.log(interviewDetails)
+					
+// 	// const output = `<p>
+// 	// 	<h2> Interview ${interviewDetails.interviewer} X ${interviewDetails.participant}</h2>
+
+// 	// 	<h3> ${interviewDetails.title}</h3>
+// 	// 	<h4>You have new interview scheduled.</h4>
+// 	// 	<h4>Details:</h4>
+// 	// 	<h4>Interviewer name: ${interviewDetails.interviewer}</h4>
+// 	// 	<h4>Participant name: ${interviewDetails.participant}</h4>
+// 	// 	<h4>Date: ${interviewDetails.date}</h4>
+// 	// 	<h4>Start time: ${interviewDetails.startTime}</h4>
+// 	// 	<h4>End time: ${interviewDetails.endTime}</h4>
+// 	// 	</p>`;
+// 	// co
+// nst output = "hello"

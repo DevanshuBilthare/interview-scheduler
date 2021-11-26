@@ -12,7 +12,7 @@ const CreateInterview = () => {
         interviewer: ''
     })
 
-    useEffect( () => {
+    useEffect(() => {
          axios.get('/participant')
         .then(data => {
           setparticipants(data.data)
@@ -28,19 +28,20 @@ const CreateInterview = () => {
         console.log(interview)
         e.preventDefault();
          
-         if(interview.interviewer == interview.participant){
+         if(interview.interviewer === interview.participant){
             alert("Interviewer and Participant can not be same")
+            return;
          }
+  
           await axios.post("/create", interview)
-            .then(data => {
-              console.log(data)
-              alert("Interview Created Succesfully")
-            })
-            .catch(err => {
-              console.log(err.response);
-              alert(err.response)
-            })
-          
+          .then(data => {
+            console.log(data)
+            alert("Interview Created Succesfully")
+          })
+          .catch(err => {
+            console.log(err.response);
+            alert("Not Created")
+          })
      }
 
      let part = 'Loading...';

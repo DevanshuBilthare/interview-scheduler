@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import axios from '../utils/axios';
 
 const Addparticipants = () => {
-
-
     const [participant, setparticipant] = useState({
         name: '',
         email: '',
@@ -18,7 +16,7 @@ const Addparticipants = () => {
 
      const SubmitHandler = async (e) => {
          e.preventDefault();
-         await axios.post("/addparticipant", participant )
+         await axios.post("/addparticipant", participant)
          .then(data => alert("Participant Created"))
          .catch(err => console.log(err.response));
      }

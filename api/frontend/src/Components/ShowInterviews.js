@@ -31,7 +31,8 @@ const ShowInterviews = () => {
                         new Date(i.date).getFullYear()
                         } . <br /> Thankyou!
                         <br />
-                    <a className="btn btn-primary">Edit</a>
+                    {/* <a  className="btn btn-primary">Edit</a> */}
+                    <button  className="btn btn-primary">Edit</button>
                 </div>
             </div>
         })
