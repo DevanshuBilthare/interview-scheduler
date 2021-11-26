@@ -55,19 +55,27 @@ router.get('/participant', function(req, res, next) {
 
 // --------------------	NODEMAILER--------------------------------------------
 
-const mailsev = (participant) => {
+const mailsev = async (participant) => {
+	const myArr = participant.split(",");
+	console.log(myArr);
+	let interviewDetails =  await Interview.findOne({participant: myArr[0]})
+	
+	console.log(interviewDetails)
+					
+	const output = `<p>
+		<h2> Interview ${interviewDetails.interviewer} X ${interviewDetails.participant}</h2>
 
-	const output = `<p> Your interview has been scheduled </p>
-		<h3>Contact Details</h3>
-		<ul>
-		<li> Name:</li>
-		<li> Company:</li>
-		<li> Email:</li>
-		<li> Phone:</li>
-		</ul>
-		<h3>Please join the interview</h3>
-		<p></p>
-  `;
+		<h3> ${interviewDetails.title}</h3>
+		<h4>You have new interview scheduled.</h4>
+		<h4>Details:</h4>
+		<h4>Interviewer name: ${interviewDetails.interviewer}</h4>
+		<h4>Participant name: ${interviewDetails.participant}</h4>
+		<h4>Date: ${interviewDetails.date}</h4>
+		<h4>Start time: ${interviewDetails.startTime}</h4>
+		<h4>End time: ${interviewDetails.endTime}</h4>
+		</p>`;
+
+
 
 	let transporter = nodemailer.createTransport({
 		host: "smtp.gmail.com",
@@ -98,29 +106,3 @@ const mailsev = (participant) => {
 	});
 };
 module.exports = router;
-
-// const myArr = participant.split(",");
-// 	console.log(myArr);
-// 	let interviewDetails;
-// 	Interview.findOne({participant: myArr[0]})
-// 	.then(data => {
-// 		console.log(data)
-// 		interviewDetails = data.title;
-// 	})
-
-// 	console.log(interviewDetails)
-					
-// 	// const output = `<p>
-// 	// 	<h2> Interview ${interviewDetails.interviewer} X ${interviewDetails.participant}</h2>
-
-// 	// 	<h3> ${interviewDetails.title}</h3>
-// 	// 	<h4>You have new interview scheduled.</h4>
-// 	// 	<h4>Details:</h4>
-// 	// 	<h4>Interviewer name: ${interviewDetails.interviewer}</h4>
-// 	// 	<h4>Participant name: ${interviewDetails.participant}</h4>
-// 	// 	<h4>Date: ${interviewDetails.date}</h4>
-// 	// 	<h4>Start time: ${interviewDetails.startTime}</h4>
-// 	// 	<h4>End time: ${interviewDetails.endTime}</h4>
-// 	// 	</p>`;
-// 	// co
-// nst output = "hello"

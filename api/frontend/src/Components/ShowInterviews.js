@@ -23,7 +23,7 @@ const ShowInterviews = () => {
                 </div>
                 <div className="card-body">
                 <h3 className="card-title">{i.title}</h3>
-                <b className="card-text">{i.participants}</b> <br />
+                <b className="card-text">{i.participant} and {i.interviewer}</b> <br />
                interview has been scheduled from {i.startTime} to 
                 {i.endTime} on {
                         new Date(i.date).getDate() + " / " +
